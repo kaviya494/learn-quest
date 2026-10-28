@@ -1,0 +1,8 @@
+# Secret and Environment Credentials
+.env
+env.js
+
+# Temporary or system files
+*.log
+.DS_Store
+Thumbs.db

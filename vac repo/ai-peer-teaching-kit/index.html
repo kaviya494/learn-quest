@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Peer Teaching Kit for Weak Topics | Royal Academy of Mastery</title>
+  
+  <!-- Google Fonts: Cinzel & Cormorant Garamond with local serif fallbacks -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Royal Palace Library Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. ROYAL HEADER & NAVIGATION BAR
+       ========================================================================= -->
+  <header class="royal-header">
+    <div class="header-container">
+      
+      <!-- Brand & Crest -->
+      <a href="#heroSection" class="brand-crest nav-link" data-target="#heroSection">
+        <div class="crest-icon-badge">⚜</div>
+        <div class="brand-text-block">
+          <h1>AI Peer Teaching Kit</h1>
+          <span class="brand-subtag">Feynman Academy of Mastery</span>
+        </div>
+      </a>
+
+      <!-- Navigation Menu -->
+      <nav>
+        <ul class="royal-nav-menu" id="royalNavMenu">
+          <li><a href="#heroSection" class="nav-link active" data-target="#heroSection">Home</a></li>
+          <li><a href="#topicsSection" class="nav-link" data-target="#topicsSection">Topics</a></li>
+          <li><a href="#explainerSection" class="nav-link" data-target="#explainerSection">Learn (Robot)</a></li>
+          <li><a href="#teachSection" class="nav-link" data-target="#teachSection">Teach (Doll)</a></li>
+          <li><a href="#battleSection" class="nav-link" data-target="#battleSection">Quiz Battle</a></li>
+          <li><a href="#bossSection" class="nav-link" data-target="#bossSection">Boss Trial</a></li>
+          <li><a href="#flashcardsSection" class="nav-link" data-target="#flashcardsSection">Flashcards</a></li>
+          <li><a href="#plannerSection" class="nav-link" data-target="#plannerSection">Planner</a></li>
+          <li><a href="#dashboardSection" class="nav-link" data-target="#dashboardSection">Dashboard</a></li>
+          <li><a href="#aboutSection" class="nav-link" data-target="#aboutSection">About & Viva</a></li>
+        </ul>
+      </nav>
+
+      <!-- Header Utilities (XP, Streak, Audio, API Key) -->
+      <div class="header-utilities">
+        <div class="header-stat-pill" title="Study Streak">
+          <span id="headerStreakCount">🔥 3d</span>
+        </div>
+        <div class="header-stat-pill" title="Academic Rank & Experience">
+          <span id="headerLevelTitle">📜 Apprentice</span>
+          <span id="headerXpCounter">120 XP</span>
+        </div>
+        <button class="header-icon-btn" id="openApiKeyModalBtn" title="Set Gemini API Key (Optional live AI)">
+          <span>🔑 API Key</span>
+        </button>
+        <button class="header-icon-btn" id="muteSoundToggleBtn" title="Sound Effects Toggle">
+          <span>🔔 Audio On</span>
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle Navigation">
+          ☰
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       MAIN APPLICATION WORKSPACE CONTAINER
+       ========================================================================= -->
+  <main class="main-wrapper">
+
+    <!-- =======================================================================
+         SECTION 1: HERO SECTION (3D DOLL & ROBOT PALACE LIBRARY)
+         ======================================================================= -->
+    <section class="app-section active-section hero-palace-section" id="heroSection">
+      
+      <div class="hero-content-col">
+        <div class="hero-royal-crest-pill">
+          <span>✧ Royal Peer Apprenticeship ✧</span>
+        </div>
+        
+        <h1 class="hero-super-heading">
+          AI Peer Teaching Kit for <span class="hero-gold-accent-text">Weak Topics</span>
+        </h1>
+        
+        <p class="hero-lead-paragraph">
+          Master challenging concepts through the legendary <strong>Feynman Technique</strong>. Let our friendly <strong>Robot Peer</strong> explain difficult topics in simple language, then solidify your knowledge by <strong>teaching it back to the Doll</strong>. Earn royal XP, conquer the 3D Quiz Battle, and build lifelong mastery.
+        </p>
+
+        <div class="hero-actions-row">
+          <button class="royal-btn-primary hero-cta-btn" data-target="#topicsSection">
+            <span>Begin Royal Apprenticeship ⚜</span>
+          </button>
+          <button class="royal-btn-secondary hero-cta-btn" data-target="#explainerSection">
+            <span>Learn Active Topic ➜</span>
+          </button>
+        </div>
+
+        <div class="hero-features-strip">
+          <div class="hero-feature-metric">
+            <h4 id="heroActiveTopicDisplay">Recursion</h4>
+            <p>Active Focus Topic</p>
+          </div>
+          <div class="hero-feature-metric">
+            <h4>Feynman Protocol</h4>
+            <p>Learn ➜ Teach ➜ Battle</p>
+          </div>
+          <div class="hero-feature-metric">
+            <h4>100% Offline</h4>
+            <p>Runs Locally with Three.js</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero 3D Three.js Interactive Canvas Frame -->
+      <div class="hero-3d-visual-col">
+        <div class="hero-3d-card-frame">
+          <canvas id="heroThreeCanvas" class="hero-canvas"></canvas>
+          <div class="hero-3d-hint-tag">
+            <span>✦ 3D Robot & Doll • Move mouse to interact ✦</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =======================================================================
+         SECTION 2: WEAK TOPIC SELECTOR & CONFIDENCE RATER
+         ======================================================================= -->
+    <section class="app-section topic-selection-section" id="topicsSection">
+      
+      <div class="section-header-banner">
+        <span class="section-pretitle">Curriculum Archives</span>
+        <h2 class="section-main-title">Select Your Weak Topic</h2>
+        <p class="section-subtitle-text">
+          Choose a subject area where your intuition feels uncertain. Rate your current confidence from 1 to 5 stars, or summon a custom topic of your own choice.
+        </p>
+        <div class="ornamental-divider">✧ ⚜ ✧</div>
+      </div>
+
+      <!-- Topic Filter Tabs -->
+      <div class="topic-filter-bar">
+        <button class="topic-filter-pill active" data-filter="all">All Disciplines</button>
+        <button class="topic-filter-pill" data-filter="cs">Programming & Algorithms</button>
+        <button class="topic-filter-pill" data-filter="dbms">DBMS & Databases</button>
+        <button class="topic-filter-pill" data-filter="math">Mathematics & Probability</button>
+        <button class="topic-filter-pill" data-filter="physics">Physics & Quantum</button>
+      </div>
+
+      <!-- Custom Topic Summoner Box -->
+      <div class="custom-topic-box">
+        <div class="custom-topic-info">
+          <h4>Summon a Custom Topic</h4>
+          <p>Type any college subject topic to generate an interactive peer teaching kit (works offline & with live Gemini AI).</p>
+        </div>
+        <div class="custom-topic-form">
+          <input type="text" id="customTopicInput" class="royal-text-input" placeholder="e.g. Dynamic Programming, Dijkstra, B-Trees...">
+          <button class="royal-btn-gold" id="addCustomTopicBtn">
+            <span>Study This Topic ⚜</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Topics Grid Container -->
+      <div class="topic-grid-container" id="topicGridContainer">
+        <!-- Dynamically injected via data.js & app.js -->
+      </div>
+
+    </section>
+
+    <!-- =======================================================================
+         SECTION 3: LEARN WITH ROBOT (PEER EXPLAINER)
+         ======================================================================= -->
+    <section class="app-section explainer-section" id="explainerSection">
+      
+      <div class="section-header-banner">
+        <span class="section-pretitle">The Royal Tutor</span>
+        <h2 class="section-main-title">Learn with Robot Peer</h2>
+        <p class="section-subtitle-text">
+          Focus Topic: <strong id="explainerTopicTitle" style="color:var(--burgundy-royal);">Recursion & Call Stack</strong>
+        </p>
+        <div class="ornamental-divider">✧ ⚜ ✧</div>
+      </div>
+
+      <div class="explainer-layout">
+        
+        <!-- Left: Robot Character Portrait -->
+        <aside class="robot-avatar-panel">
+          <div class="robot-portrait-emblem">🤖</div>
+          <h3 class="robot-name-title">Arch-Tutor Borg</h3>
+          <p class="robot-title-sub">Royal Explainer & Mentor</p>
+          <button class="royal-btn-primary robot-voice-trigger" id="robotAudioReadBtn">
+            <span>🔊 Listen to Robot Peer</span>
+          </button>
+        </aside>
+
+        <!-- Right: Scholarly Explanation Card -->
+        <div class="explainer-content-panel">
+          <div class="explainer-dialogue-card">
+            
+            <p class="dialogue-intro-quote" id="robotIntroText">
+              "Greetings, fellow scholar! Let us unravel this topic from first principles."
+            </p>
+
+            <!-- Everyday Analogy Block -->
+            <div class="explainer-card-block">
+              <div class="block-header-label">
+                <span>📖 Everyday Real-World Analogy</span>
+              </div>
+              <p class="analogy-text-content" id="robotAnalogyText">
+                Loading everyday analogy...
+              </p>
+            </div>
+
+            <!-- Key Core Principles -->
+            <div class="explainer-card-block">
+              <div class="block-header-label">
+                <span>⚡ Core Foundational Pillars</span>
+              </div>
+              <ul class="key-points-list" id="robotKeyPointsList">
+                <!-- Dynamically generated list -->
+              </ul>
+            </div>
+
+            <!-- Catchy Royal Mnemonic -->
+            <div class="mnemonic-royal-banner">
+              <span>🧠 Royal Mnemonic:</span>
+              <span id="robotMnemonicText">Remember B.R.S.</span>
+            </div>
+
+            <div class="ornamental-divider">✧ ⚜ ✧</div>
+
+            <!-- Interactive Trace Prompt -->
+            <div class="interactive-prompt-card">
+              <strong>🔬 Interactive Walkthrough:</strong>
+              <span id="robotInteractivePrompt">Walkthrough step by step...</span>
+            </div>
+
+            <div class="explainer-next-row">
+              <button class="royal-btn-secondary section-jump-btn" data-target="#topicsSection">
+                <span>Choose Another Topic</span>
+              </button>
+              <button class="royal-btn-primary section-jump-btn" data-target="#teachSection">
+                <span>Now, Teach the Doll! ➜</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =======================================================================
+         SECTION 4: TEACH-BACK MODE (TEACH THE DOLL)
+         ======================================================================= -->
+    <section class="app-section teach-back-section" id="teachSection">
+      
+      <div class="section-header-banner">
+        <span class="section-pretitle">The Feynman Protocol</span>
+        <h2 class="section-main-title">Teach the Doll</h2>
+        <p class="section-subtitle-text">
+          "If you cannot explain it simply, you do not understand it well enough." — Albert Einstein & Richard Feynman
+        </p>
+        <div class="ornamental-divider">✧ ⚜ ✧</div>
+      </div>
+
+      <div class="teach-back-layout">
+        
+        <!-- Left: Doll Avatar -->
+        <aside class="doll-avatar-panel">
+          <div class="doll-portrait-emblem">🎎</div>
+          <h3 class="doll-name-title">Princess Aria</h3>
+          <p class="doll-title-sub">The Eager Royal Apprentice</p>
+          <div class="doll-request-bubble">
+            "Explain <span id="dollPromptTopicTitle">this topic</span> to me like I'm 10 years old! How would you summarize it in your own words?"
+          </div>
+        </aside>
+
+        <!-- Right: Student Explanation Input & Rubric Evaluation -->
+        <div class="teach-back-editor-panel">
+          
+          <div class="feynman-tips-strip">
+            💡 <strong>Peer Teaching Tips:</strong> Use an intuitive analogy, explain why the topic exists, identify the core mechanism, and highlight what happens if things go wrong!
+          </div>
+
+          <textarea id="teachBackInput" class="teach-back-textarea" placeholder="Dear Aria, imagine this concept like... First, you need to understand that... The critical rule is..."></textarea>
+
+          <div class="teach-back-actions-row">
+            <button class="royal-btn-secondary" id="clearTeachBackBtn">
+              <span>Clear Text</span>
+            </button>
+            <button class="royal-btn-primary" id="evaluateTeachBackBtn">
+              <span>Evaluate My Teaching ⚜</span>
+            </button>
+          </div>
+
+          <!-- Doll's AI Feedback Card (Shown after evaluation) -->
+          <div class="teach-back-feedback-card hidden" id="teachBackFeedbackCard">
+            <div class="feedback-header-row">
+              <h3>🎎 Aria's Evaluation & Score</h3>
+              <div class="score-gauge-wrap">
+                <span class="score-number-callout" id="teachScoreNumber">85%</span>
+                <div class="score-bar-track">
+                  <div class="score-bar-fill" id="teachScoreBarFill" style="width: 85%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="doll-speech-balloon" id="dollFeedbackSpeech">
+              "Splendid! I understand so much better now!"
+            </div>
+
+            <div class="rubric-breakdown-grid">
+              <div class="rubric-card-col">
+                <h4 class="rubric-col-title">✅ What You Explained Accurately</h4>
+                <p id="teachWhatWasCorrect">You explained the stopping condition and recursion calls.</p>
+              </div>
+              <div class="rubric-card-col">
+                <h4 class="rubric-col-title">🔍 Areas to Strengthen</h4>
+                <p id="teachWhatWasMissing">Try mentioning the call stack unwinding in memory.</p>
+              </div>
+            </div>
+
+            <div class="explainer-next-row">
+              <button class="royal-btn-gold section-jump-btn" data-target="#battleSection">
+                <span>Enter Quiz Battle Arena ➜</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =======================================================================
+         SECTION 5: QUIZ BATTLE (3D ARENA FACEOFF: ROBOT VS DOLL)
+         ======================================================================= -->
+    <section class="app-section battle-arena-section" id="battleSection">
+      
+      <div class="section-header-banner">
+        <span class="section-pretitle">The Royal Coliseum</span>
+        <h2 class="section-main-title">3D Quiz Battle Arena</h2>
+        <p class="section-subtitle-text">
+          Guide the Doll against the Robot Examiner! Each correct answer powers up the Doll with golden royal auras; wrong answers give the Robot battle points.
+        </p>
+        <div class="ornamental-divider">✧ ⚜ ✧</div>
+      </div>
+
+      <!-- 3D Arena Three.js Canvas -->
+      <div class="battle-arena-canvas-frame">
+        <canvas id="battleThreeCanvas" class="battle-canvas"></canvas>
+        
+        <!-- Live Battle Overlay Meters -->
+        <div class="arena-meters-overlay">
+          <!-- Robot Meter -->
+          <div class="fighter-hp-pill">
+            <span class="fighter-name-label">🤖 Robot Examiner</span>
+            <div class="meter-track">
+              <div class="meter-fill-robot" id="battleRobotPowerFill" style="width: 0%;"></div>
+            </div>
+            <span class="meter-score-text" id="battleRobotScoreText">0 pts</span>
+          </div>
+
+          <!-- Doll Meter -->
+          <div class="fighter-hp-pill">
+            <span class="fighter-name-label">🎎 Doll Apprentice</span>
+            <div class="meter-track">
+              <div class="meter-fill-doll" id="battleDollPowerFill" style="width: 0%;"></div>
+            </div>
+            <span class="meter-score-text" id="battleDollScoreText">0 pts</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question Card Panel -->
+      <div class="battle-question-card" id="battleQuestionCard">
+        <div class="battle-q-header">
+          <span class="battle-q-counter" id="battleQuestionCounter">Question 1 of 5</span>
+          <span class="battle-streak-badge">30 XP per Question</span>
+        </div>
+
+        <h3 class="battle-question-title" id="battleQuestionText">
+          Loading battle question...
+        </h3>
+
+        <div class="battle-options-grid" id="battleOptionsGrid">
+          <!-- Options injected via JavaScript -->
+        </div>
+
+        <div class="battle-instant-explanation hidden" id="battleInstantExplanation">
+          <p id="battleExplanationText"></p>
+        </div>
+
+        <div class="battle-actions-row">
+          <button class="royal-btn-primary hidden" id="battleNextQuestionBtn">
+            <span>Next Question ➜</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Battle Result Summary (Shown when finished) -->
+      <div class="battle-result-summary hidden" id="battleResultSummary">
+        <h3 class="battle-summary-title" id="battleSummaryTitle">Battle Complete!</h3>
+        <p class="battle-summary-desc" id="battleSummaryDesc">
+          You demonstrated remarkable command of the topic!
+        </p>
+        <div class="battle-xp-notice" id="battleEarnedXpNotice">+150 XP Earned!</div>
+        
+        <div class="hero-actions-row" style="justify-content: center;">
+          <button class="royal-btn-secondary" id="battleRestartBtn">
+            <span>Rematch in Arena ↻</span>
+          </button>
+          <button class="royal-btn-gold section-jump-btn" data-target="#bossSection">
+            <span>Challenge Boss Trial 👑</span>
+          </button>
+          <button class="royal-btn-primary section-jump-btn" data-target="#flashcardsSection">
+            <span>3D Flashcards ➜</span>
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =======================================================================
+         SECTION 6: BOSS LEVEL (10-QUESTION GRAND TIMED TRIAL)
+         ======================================================================= -->
+    <section class="app-section boss-level-section" id="bossSection">
+      
+      <div class="section-header-banner">
+        <span class="section-pretitle">The Royal Gauntlet</span>
+        <h2 class="section-main-title">Boss Level: The Grand Trial</h2>
+        <p class="section-subtitle-text">
+          A high-stakes 10-question timed challenge per topic. Score 70%+ to unlock the Royal Crown of Mentorship and earn 250 XP!
+        </p>
+        <div class="ornamental-divider">✧ ⚜ ✧</div>
+      </div>
+
+      <div class="boss-card-container">
+        
+        <!-- Intro View -->
+        <div class="boss-intro-view" id="bossIntroView">
+          <div class="boss-royal-seal">👑</div>
+          <h3 style="font-size: 2.2rem; margin-bottom: 1rem; color: var(--burgundy-deep);">Ready for the Supreme Trial?</h3>
+          <p style="font-size: 1.25rem; margin-bottom: 2rem;">
+            You have <strong>120 seconds</strong> to solve 10 advanced academic questions. High focus, deep understanding, and speed will determine your mastery rank!
+          </p>
+          <button class="royal-btn-gold" id="startBossChallengeBtn" style="font-size: 1.3rem; padding: 1.1rem 2.8rem;">
+            <span>Commence Grand Trial ⚔️</span>
+          </button>
+        </div>
+
+        <!-- Active Arena View -->
+        <div class="boss-active-view hidden" id="bossActiveArenaView">
+          <div class="boss-header-bar">
+            <span class="battle-q-counter" id="bossQuestionCounter">Trial 1 of 10</span>
+            <span class="boss-timer-display" id="bossTimerDisplay">⏱ 2:00</span>
+          </div>
+
+          <h3 class="battle-question-title" id="bossQuestionText">
+            Loading trial question...
+          </h3>
+
+          <div class="battle-options-grid" id="bossOptionsGrid" style="grid-template-columns: 1fr;">
+            <!-- Options injected dynamically -->
+          </div>
+
+          <div class="battle-instant-explanation hidden" id="bossInstantExplanation">
+            <p id="bossExplanationText"></p>
+          </div>
+
+          <div class="battle-actions-row">
+            <button class="royal-btn-primary hidden" id="bossNextQuestionBtn">
+              <span>Next Trial ➜</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Result View -->
+        <div class="boss-result-view hidden" id="bossResultView" style="text-align: center;">
+          <h3 style="font-size: 2.2rem; margin-bottom: 1rem; color: var(--burgundy-deep);" id="bossResultTitle">Trial Concluded</h3>
+          <p style="font-size: 1.3rem; margin-bottom: 2rem;" id="bossResultDesc"></p>
+          <div class="hero-actions-row" style="justify-content: center;">
+            <button class="royal-btn-secondary" id="bossRetryBtn">
+              <span>Try Again ↻</span>
+            </button>
+            <button class="royal-btn-primary section-jump-btn" data-target="#dashboardSection">
+              <span>View Royal Treasury 🏆</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =======================================================================
+         SECTION 7: FLASHCARDS & MEMORY MATCH MINI-GAME
+         ======================================================================= -->
+    <section class="app-section flashcards-section" id="flashcardsSection">
+      
+      <div class="section-header-banner">
+        <span class="section-pretitle">Active Recall Chamber</span>
+        <h2 class="section-main-title">3D Flashcards & Memory Match</h2>
+        <p class="section-subtitle-text">
+          Reinforce mental pathways through interactive 3D card flips and concept-matching mini-games.
+        </p>
+        <div class="ornamental-divider">✧ ⚜ ✧</div>
+      </div>
+
+      <!-- Mode Switcher -->
+      <div class="flashcard-mode-toggle">
+        <button class="mode-pill-btn active" id="viewFlashcardsModeBtn">3D Flashcards Mode</button>
+        <button class="mode-pill-btn" id="viewMemoryMatchModeBtn">Memory Match Mini-Game</button>
+      </div>
+
+      <!-- 1. Flashcards Container -->
+      <div class="flashcards-container-view" id="flashcardsContainerView">
+        <div class="flashcard-3d-scene">
+          <div class="royal-flashcard-3d" id="royalFlashcard3D">
+            
+            <!-- Front Face -->
+            <div class="flashcard-face flashcard-front">
+              <span class="card-top-tag">Question / Concept</span>
+              <div class="card-main-text" id="flashcardFrontContent">
+                What is the Base Case in recursion?
+              </div>
+              <span class="card-click-hint">✦ Click card or press Space to Flip ✦</span>
+            </div>
+
+            <!-- Back Face -->
+            <div class="flashcard-face flashcard-back">
+              <span class="card-top-tag">Answer / Insight</span>
+              <div class="card-main-text" id="flashcardBackContent">
+                The terminating condition that halts further self-calling and starts unwinding the stack.
+              </div>
+              <span class="card-click-hint">✦ Click to Flip back ✦</span>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="flashcard-controls-row">
+          <button class="royal-btn-secondary" id="prevFlashcardBtn">
+            <span>← Previous</span>
+          </button>
+          <button class="royal-btn-primary" id="flipFlashcardBtn">
+            <span>Flip Card ⤾</span>
+          </button>
+          <button class="royal-btn-gold" id="knowFlashcardBtn">
+            <span>I Know This! (+15 XP) ✓</span>
+          </button>
+          <button class="royal-btn-secondary" id="nextFlashcardBtn">
+            <span>Next →</span>
+          </button>
+        </div>
+
+        <div style="text-align: center; color: var(--text-muted); font-weight: 700;">
+          <span id="flashcardCounterText">Card 1 of 5</span>
+        </div>
+      </div>
+
+      <!-- 2. Memory Match Mini-Game Container -->
+      <div class="memory-match-container-view hidden" id="memoryMatchContainerView">
+        <div class="memory-game-header">
+          <span class="memory-status-text" id="memoryGameStatus">Pairs Matched: 0 / 4</span>
+          <button class="royal-btn-secondary" onclick="window.peerApp.initMemoryMatch()">
+            <span>Shuffle & Restart ↻</span>
+          </button>
+        </div>
+
+        <div class="memory-cards-grid" id="memoryCardsGrid">
+          <!-- 8 cards injected dynamically -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =======================================================================
+         SECTION 8: SPACED REVISION PLANNER
+         ======================================================================= -->
+    <section class="app-section planner-section" id="plannerSection">
+      
+      <div class="section-header-banner">
+        <span class="section-pretitle">Cognitive Science</span>
+        <h2 class="section-main-title">Spaced Revision Planner</h2>
+        <p class="section-subtitle-text">
+          Conquer the Ebbinghaus Forgetting Curve with scheduled retention intervals: Day 1, Day 3, Day 7, and Day 14.
+        </p>
+        <div class="ornamental-divider">✧ ⚜ ✧</div>
+      </div>
+
+      <div class="planner-dashboard-banner">
+        <div>
+          <h3 style="font-size: 1.8rem; color: var(--burgundy-deep); margin-bottom: 0.4rem;">
+            Schedule Current Topic: <span id="currentActiveTopicPill">Recursion</span>
+          </h3>
+          <p style="margin: 0; color: var(--text-muted);">
+            Lock in dates calculated automatically from today to achieve permanent retention.
+          </p>
+        </div>
+        <button class="royal-btn-gold" id="scheduleCurrentTopicBtn">
+          <span>📅 Schedule Revision for This Topic</span>
+        </button>
+      </div>
+
+      <!-- Spaced Revision List -->
+      <div class="spaced-planner-list" id="spacedPlannerList">
+        <!-- Injected via JavaScript -->
+      </div>
+
+    </section>
+
+    <!-- =======================================================================
+         SECTION 9: PROGRESS DASHBOARD & ROYAL TREASURY
+         ======================================================================= -->
+    <section class="app-section dashboard-section" id="dashboardSection">
+      
+      <div class="section-header-banner">
+        <span class="section-pretitle">Academic Hall of Records</span>
+        <h2 class="section-main-title">Progress Dashboard & Treasury</h2>
+        <p class="section-subtitle-text">
+          Track your weak vs strong mastery, study streaks, earned badges, and inspect your 3D collectible gems.
+        </p>
+        <div class="ornamental-divider">✧ ⚜ ✧</div>
+      </div>
+
+      <!-- Top Metrics Grid -->
+      <div class="dashboard-metrics-grid">
+        <div class="dash-metric-card">
+          <div class="dash-metric-icon">🔥</div>
+          <div class="dash-metric-info">
+            <h4>Study Streak</h4>
+            <div class="dash-metric-value" id="dashStreakCount">3 Days</div>
+          </div>
+        </div>
+
+        <div class="dash-metric-card">
+          <div class="dash-metric-icon" id="dashLevelBadgeIcon">📜</div>
+          <div class="dash-metric-info">
+            <h4>Academic Rank</h4>
+            <div class="dash-metric-value" id="dashLevelTitle">Apprentice</div>
+          </div>
+        </div>
+
+        <div class="dash-metric-card">
+          <div class="dash-metric-icon">⭐</div>
+          <div class="dash-metric-info">
+            <h4>Total Knowledge XP</h4>
+            <div class="dash-metric-value" id="dashCurrentXp">120 XP</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- XP Bar -->
+      <div class="dash-xp-progress-wrap">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <strong style="color: var(--burgundy-deep); font-size: 1.2rem;">Ascension Progress to Next Rank</strong>
+          <span style="color: var(--text-gold); font-weight: 700;" id="dashNextLevelXp">Next Rank: 250 XP</span>
+        </div>
+        <div class="dash-xp-track">
+          <div class="dash-xp-fill" id="dashXpProgressBarFill" style="width: 48%;"></div>
+        </div>
+      </div>
+
+      <!-- Weak vs Strong Topics Split -->
+      <div class="weak-vs-strong-grid">
+        <div class="status-column-card">
+          <h3 style="color: #9B1130; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.5rem;">
+            <span>⚠️ Topics Needing Review (Weak)</span>
+          </h3>
+          <div id="dashWeakTopicsList">
+            <!-- Injected via app.js -->
+          </div>
+        </div>
+
+        <div class="status-column-card">
+          <h3 style="color: #2E7D32; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.5rem;">
+            <span>✨ Mastered Disciplines (Strong)</span>
+          </h3>
+          <div id="dashStrongTopicsList">
+            <!-- Injected via app.js -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 3D Collectible Trophy Room (Three.js interactive 3D models) -->
+      <div class="treasury-card-container">
+        <div class="treasury-split-layout">
+          
+          <div>
+            <h3 style="font-size: 2rem; color: var(--burgundy-deep); margin-bottom: 0.5rem;">
+              The Royal Gem Treasury
+            </h3>
+            <p style="margin-bottom: 1.5rem; color: var(--text-muted);">
+              Inspect your unlocked 3D gemstones and royal artifacts. Click and drag in the viewer to rotate in real-time 3D!
+            </p>
+
+            <div class="trophy-selector-row">
+              <button class="trophy-selector-pill active" data-trophy="ruby">Ruby of Courage</button>
+              <button class="trophy-selector-pill" data-trophy="emerald">Emerald (Streak)</button>
+              <button class="trophy-selector-pill" data-trophy="sapphire">Sapphire (Scholar)</button>
+              <button class="trophy-selector-pill" data-trophy="crown">Royal Crown</button>
+            </div>
+
+            <table class="trophies-status-table">
+              <tr>
+                <td><strong>Ruby of Courage:</strong></td>
+                <td id="trophyRubyStatus">✨ Unlocked</td>
+              </tr>
+              <tr>
+                <td><strong>Emerald of Tenacity:</strong></td>
+                <td id="trophyEmeraldStatus">🔒 Locked (3-day streak)</td>
+              </tr>
+              <tr>
+                <td><strong>Sapphire of Wisdom:</strong></td>
+                <td id="trophySapphireStatus">🔒 Locked (Scholar rank)</td>
+              </tr>
+              <tr>
+                <td><strong>Crown of Mentorship:</strong></td>
+                <td id="trophyCrownStatus">🔒 Locked (Conquer Boss trial)</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="trophy-canvas-frame">
+            <canvas id="trophyThreeCanvas" class="trophy-canvas"></canvas>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Badges Showcase -->
+      <div class="badges-showcase-wrap">
+        <h3 style="font-size: 2rem; color: var(--burgundy-deep); margin-bottom: 1.5rem; text-align: center;">
+          Royal Badges of Honor
+        </h3>
+        <div class="badges-grid" id="dashBadgesGrid">
+          <!-- Injected via app.js -->
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 3rem;">
+        <button class="royal-btn-secondary" id="resetAllProgressBtn" style="color: #9B1130; border-color: rgba(155, 17, 48, 0.4);">
+          <span>Reset All Progress Data</span>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- =======================================================================
+         SECTION 10: ABOUT THE PROJECT & VIVA GUIDE
+         ======================================================================= -->
+    <section class="app-section about-project-section" id="aboutSection">
+      
+      <div class="section-header-banner">
+        <span class="section-pretitle">Academic Documentation</span>
+        <h2 class="section-main-title">About the Project & Viva Guide</h2>
+        <p class="section-subtitle-text">
+          Architecture overview, scientific methodology, viva presentation notes, and quick references.
+        </p>
+        <div class="ornamental-divider">✧ ⚜ ✧</div>
+      </div>
+
+      <div class="viva-guide-card">
+        
+        <h3 style="font-size: 1.8rem; color: var(--burgundy-deep); margin-bottom: 1rem;">
+          1. Project Abstract & Pedagogical Rationale
+        </h3>
+        <p>
+          Traditional studying often suffers from the <strong>Illusion of Explanatory Depth</strong>—students believe they understand an abstract subject after merely reading or watching a lecture, only to falter when required to apply it. The <strong>AI Peer Teaching Kit</strong> addresses this by implementing the <strong>Feynman Technique</strong> in a gamified, multi-agent peer environment:
+        </p>
+        <ul style="margin-left: 2rem; margin-bottom: 1.8rem; display: flex; flex-direction: column; gap: 0.5rem;">
+          <li><strong>Step 1 (Peer Explanation):</strong> A friendly Robot peer introduces concepts through simple analogies and structured mental models.</li>
+          <li><strong>Step 2 (Teach-Back Evaluation):</strong> The student assumes the teacher's role by explaining the concept to the Doll character, who acts as an inquisitive novice.</li>
+          <li><strong>Step 3 (Immediate Corrective Feedback):</strong> Intelligent rubrics evaluate the explanation, highlighting what was understood and what key points were omitted.</li>
+          <li><strong>Step 4 (Gamified Retrieval & Spaced Repetition):</strong> 3D Quiz Battles, Boss Trials, Flashcards, and Leitner intervals permanently consolidate memory.</li>
+        </ul>
+
+        <h3 style="font-size: 1.8rem; color: var(--burgundy-deep); margin-bottom: 1rem;">
+          2. Technical Architecture & Design Choices
+        </h3>
+        <p>
+          Built strictly with <strong>Plain HTML5, CSS3, and modern Vanilla JavaScript</strong> with local <strong>Three.js</strong>:
+        </p>
+        <ul style="margin-left: 2rem; margin-bottom: 1.8rem; display: flex; flex-direction: column; gap: 0.5rem;">
+          <li><strong>Zero Build Tools / Zero NPM:</strong> Runs directly by double-clicking <code>index.html</code> on any browser.</li>
+          <li><strong>Zero External Asset Dependency:</strong> 3D models and procedural sound effects use local Three.js and the native <strong>Web Audio API</strong>, guaranteeing zero CORS errors on <code>file:///</code>.</li>
+          <li><strong>Dual-Mode AI Engine:</strong> Seamlessly operates offline with built-in rubrics and heuristics, with optional live <strong>Google Gemini API</strong> integration for dynamic grading and custom topic synthesis.</li>
+          <li><strong>Client-Side State Persistence:</strong> Profiles, streaks, XP, custom topics, and Leitner schedules are stored reliably in <code>localStorage</code>.</li>
+        </ul>
+
+        <h3 style="font-size: 1.8rem; color: var(--burgundy-deep); margin-bottom: 1.5rem;">
+          3. Viva Q&A Cheat Sheet (For College Examiners)
+        </h3>
+
+        <div class="viva-qa-item">
+          <div class="viva-qa-question">
+            <strong>Q1: Why use peer teaching rather than standard AI question answering?</strong>
+          </div>
+          <p>
+            <strong>A:</strong> Standard Q&A keeps the student in a passive reception mode. Peer teaching forces active cognitive reconstruction: the student must translate abstract technical jargon into lucid plain English, exposing misconceptions and strengthening neural connections through generative learning.
+          </p>
+        </div>
+
+        <div class="viva-qa-item">
+          <div class="viva-qa-question">
+            <strong>Q2: How does the application work without a backend or server?</strong>
+          </div>
+          <p>
+            <strong>A:</strong> All state management is handled through the browser's persistent <code>localStorage</code> API. Audio is synthesized on the fly via the Web Audio API (Oscillators and Gain nodes), 3D graphics are rendered through WebGL using Three.js, and offline evaluation uses weighted regex rubrics with fallback AI endpoints.
+          </p>
+        </div>
+
+        <div class="viva-qa-item">
+          <div class="viva-qa-question">
+            <strong>Q3: How are the 3D models of the Robot and Doll created?</strong>
+          </div>
+          <p>
+            <strong>A:</strong> They are procedurally built using Three.js primitive geometries (Cylinders, Boxes, Spheres, Tori) grouped into hierarchical scene graphs. This avoids heavy external .gltf/.obj files that trigger CORS security errors when loaded directly from local disks (<code>file:///</code>).
+          </p>
+        </div>
+
+        <div class="viva-qa-item">
+          <div class="viva-qa-question">
+            <strong>Q4: How does the Spaced Repetition Planner function?</strong>
+          </div>
+          <p>
+            <strong>A:</strong> It implements the Leitner interval model (Days 1, 3, 7, and 14). When a student completes a teach-back session, target review dates are calculated from <code>Date.now()</code>. The interface highlights overdue, due today, and completed reviews.
+          </p>
+        </div>
+
+        <!-- Download Project ZIP Action -->
+        <div class="hero-actions-row" style="margin-top: 2.5rem; justify-content: center;">
+          <a href="ai-peer-teaching-kit.zip" download="ai-peer-teaching-kit.zip" class="royal-btn-gold">
+            <span>📦 Download Complete Project ZIP</span>
+          </a>
+          <button class="royal-btn-primary section-jump-btn" data-target="#heroSection">
+            <span>Return to Royal Courtyard ⚜</span>
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       MODAL: GEMINI API KEY CONFIGURATION
+       ========================================================================= -->
+  <div class="royal-modal-overlay hidden" id="apiKeyModal">
+    <div class="royal-modal-card">
+      <button class="modal-close-icon" id="closeApiKeyModalBtn">✕</button>
+      <h3 style="font-size: 1.8rem; color: var(--burgundy-deep); margin-bottom: 0.5rem;">
+        Gemini AI Configuration
+      </h3>
+      <p style="font-size: 1.05rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+        Paste an optional Google Gemini API key to enable live AI evaluations and dynamic topic generation. If left empty, the kit uses its rich offline content and heuristics.
+      </p>
+
+      <div style="margin-bottom: 1.5rem;">
+        <label style="display: block; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-gold);">
+          Gemini API Key:
+        </label>
+        <input type="password" id="geminiApiKeyInput" class="royal-text-input" placeholder="AIzaSy...">
+      </div>
+
+      <div id="apiKeyStatusIndicator" style="margin-bottom: 1.5rem; font-size: 0.95rem;">
+        <!-- Status indicator injected dynamically -->
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <button class="royal-btn-secondary" id="clearApiKeyBtn">
+          <span>Remove Key</span>
+        </button>
+        <button class="royal-btn-primary" id="saveApiKeyBtn">
+          <span>Save & Apply ⚜</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="royalToastContainer" class="royal-toast-container"></div>
+
+  <!-- =========================================================================
+       SCRIPTS (LOCAL LIBRARIES & MODULAR CODE)
+       ========================================================================= -->
+  <!-- Optional Environment Configuration (for file-based Gemini API Key) -->
+  <script src="env.js"></script>
+
+  <!-- Local Three.js standalone library (works 100% offline) -->
+  <script src="libs/three.min.js"></script>
+  
+  <!-- Educational topics database & analogies -->
+  <script src="js/data.js"></script>
+
+  <!-- Web Audio API procedural synthesizer -->
+  <script src="js/audio.js"></script>
+
+  <!-- Three.js 3D Hero Scene (Robot & Doll) -->
+  <script src="js/three-hero.js"></script>
+
+  <!-- Three.js 3D Quiz Battle Arena Scene -->
+  <script src="js/three-battle.js"></script>
+
+  <!-- Three.js 3D Collectible Trophy Room Scene -->
+  <script src="js/three-trophy.js"></script>
+
+  <!-- Gemini API integration & offline fallback evaluator -->
+  <script src="js/gemini-api.js"></script>
+
+  <!-- Main Application Orchestrator & State Manager -->
+  <script src="js/app.js"></script>
+
+</body>
+</html>
